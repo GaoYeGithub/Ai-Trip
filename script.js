@@ -3,7 +3,20 @@ let swiper;
 function getItinerary(e) {
   e.preventDefault();
 
-  console.log(e.target.location.value);
+  const location = e.target.location.value;
+  const startDate = e.target.startdate.value;
+  const endDate = e.target.enddate.value;
+  const activityType = e.target.activityType.value;
+
+  console.log(location, startDate, endDate, activityType);
+
+  let prompt = `plan a trip itinerary for someone going to ${location} from ${startDate} to ${endDate}. have about 3 or 4 things to do per day.`;
+
+  if (activityType) {
+    prompt += ` Focus on ${activityType} activities.`;
+  }
+
+  prompt += ` respond ONLY with an array that has JSON objects with the parameters \`date\` \`eventTitle\` \`startTime\` \`endTime\` \`description\``;
 
   fetch('https://jamsapi.hackclub.dev/openai/chat/completions', {
     method: 'POST',
@@ -15,7 +28,7 @@ function getItinerary(e) {
       'model': 'gpt-3.5-turbo',
       'messages': [{
         'role': 'user',
-        'content': `plan a trip itinerary for someone going to ${e.target.location.value} from ${e.target.startdate.value} to ${e.target.enddate.value}. have about 3 or 4 things to do per day. respond ONLY with an array that has JSON objects with the parameters \`date\` \`eventTitle\` \`startTime\` \`endTime\` \`description\``
+        'content': prompt
       }]
     })
   }).then(result => result.json()).then(eventsResponse => {

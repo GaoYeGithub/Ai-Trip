@@ -14,14 +14,17 @@
 
     <form onsubmit="getItinerary(event)" class="mb-4">
       <div class="row g-3">
-        <div class="col-md-4">
+        <div class="col-md-3">
           <input type="text" class="form-control" name="location" placeholder="Location" required>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
           <input name="startdate" type="date" class="form-control" required>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
           <input name="enddate" type="date" class="form-control" required>
+        </div>
+        <div class="col-md-3">
+          <input type="text" class="form-control" name="activityType" placeholder="Activity Type (optional)">
         </div>
         <div class="col-md-2">
           <input type="submit" value="Submit" class="btn btn-primary w-100">
