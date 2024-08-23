@@ -1,5 +1,16 @@
-html {
-  height: 100%;
+.swiper-container {
   width: 100%;
-  font-family: sans-serif;
+  padding-top: 20px;
+  padding-bottom: 50px;
+}
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 300px;
+  height: 300px;
+}
+
+.swiper-slide .card {
+  height: 100%;
 }

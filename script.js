@@ -1,3 +1,5 @@
+let swiper;
+
 function getItinerary(e) {
   e.preventDefault();
 
@@ -20,11 +22,11 @@ function getItinerary(e) {
     console.log(eventsResponse);
     const events = JSON.parse(eventsResponse.choices[0].message.content);
 
-    let htmlGenerated = '<div class="row">';
+    let htmlGenerated = '';
 
     for (const event of events) {
       htmlGenerated += `
-        <div class="col-md-4 mb-4">
+        <div class="swiper-slide">
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">${event.eventTitle}</h5>
@@ -37,8 +39,34 @@ function getItinerary(e) {
       `;
     }
 
-    htmlGenerated += '</div>';
-
     document.getElementById("eventlist").innerHTML = htmlGenerated;
+
+    if (swiper) {
+      swiper.destroy();
+    }
+    swiper = new Swiper('.swiper-container', {
+      slidesPerView: 1,
+      spaceBetween: 30,
+      loop: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      breakpoints: {
+        640: {
+          slidesPerView: 2,
+        },
+        768: {
+          slidesPerView: 3,
+        },
+        1024: {
+          slidesPerView: 4,
+        },
+      }
+    });
   });
 }
